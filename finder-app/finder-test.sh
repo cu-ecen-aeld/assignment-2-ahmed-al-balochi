@@ -1,6 +1,7 @@
 #!/bin/sh
 # Tester script for assignment 1 and assignment 2
 # Author: Siddhant Jajoo
+# Revision: Mohamed Magdy
 
 set -e
 set -u
@@ -28,7 +29,7 @@ fi
 MATCHSTR="The number of files are ${NUMFILES} and the number of matching lines are ${NUMFILES}"
 
 echo "Writing ${NUMFILES} files containing string ${WRITESTR} to ${WRITEDIR}"
-
+####
 rm -rf "${WRITEDIR}"
 
 # create $WRITEDIR if not assignment1
@@ -49,17 +50,19 @@ then
 	fi
 fi
 #echo "Removing the old writer utility and compiling as a native application"
-#make clean
-#make
+make clean
+make
 
 for i in $( seq 1 $NUMFILES)
 do
-	./writer.sh "$WRITEDIR/${username}$i.txt" "$WRITESTR"
+    #
+    #./writer.sh "$WRITEDIR/${username}$i.txt" "$WRITESTR"
+    ./writer "$WRITEDIR/${username}$i.txt" "$WRITESTR"
 done
-
 OUTPUTSTRING=$(./finder.sh "$WRITEDIR" "$WRITESTR")
 
 # remove temporary directories
+#####
 rm -rf /tmp/aeld-data
 
 set +e
@@ -71,3 +74,4 @@ else
 	echo "failed: expected  ${MATCHSTR} in ${OUTPUTSTRING} but instead found"
 	exit 1
 fi
+
