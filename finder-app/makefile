@@ -1,15 +1,17 @@
-# Simply expanded variables
-# ARCH:=$(shell arch)
-# CWD:=$(shell pwd) 
-# OS:=$(shell uname) 
-# Recursively Expanded Variables 
-ifndef CROSS_COMPILE
+ifdef CROSS_COMPILE
+# checks if the cross_compile variable is defined 
+
 override CROSS_COMPILE=
 endif
-CFLAGS = -g -Wall  
+# if the variable is not defined it this will define it
 
+CFLAGS = -g -Wall
+# -g enables debugging -Wall enables all warnings
+
+# compile
 writer:
 	$(CROSS_COMPILE)gcc $(CFLAGS) -o writer writer.c
 
+# after the compile is done clean/remove the bin
 clean:
-	rm -f writer
+	rm writer
